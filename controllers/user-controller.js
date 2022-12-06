@@ -43,7 +43,23 @@ const userController = {
         console.log(err)
         res.status(500).json
       })
-  }
+  },
+  newFriend(req, res) {
+    User.findOneAndUpdate( { _id: req.params.userId }, { $addToSet: { friends: req.params.friendId } } )
+    .then(res.json('Added Friend!'))
+    .catch((err) => {
+      console.log(err)
+      res.status(500).json(err)
+    })
+  },
+  deleteFriend(req, res) {
+    User.findOneAndUpdate( { _id: req.params.userId }, { $pull: { friends: req.params.friendId } } )
+    .then(res.json('Removed Friend!'))
+    .catch((err) => {
+      console.log(err)
+      res.status(500).json(err)
+    })
+  },
   
 
 }

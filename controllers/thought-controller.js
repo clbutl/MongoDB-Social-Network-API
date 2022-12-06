@@ -40,6 +40,22 @@ const thoughtController = {
         console.log(err)
         res.status(500).json
       })
+  },
+  newReaction(req, res) {
+    Thought.findOneAndUpdate( { _id: req.params.thoughtId }, { $addToSet: { reactions: req.body } } )
+    .then(res.json('Added Reaction!'))
+    .catch((err) => {
+      console.log(err)
+      res.status(500).json(err)
+    })
+  },
+  deleteReaction(req, res) {
+    Thought.findOneAndUpdate( { _id: req.params.thoughtId }, { $pull: { reactionId: req.body.reactionId } } )
+    .then(res.json('Deleted Reaction!'))
+    .catch((err) => {
+      console.log(err)
+      res.status(500).json(err)
+    })
   }
 };
 
