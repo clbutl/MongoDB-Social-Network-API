@@ -22,7 +22,7 @@ const userController = {
   },
   newUser(req, res) {
     User.create(req.body)
-      .then(data => res.json(data))
+      .then(res.json('Updated User!'))
       .catch((err) => {
         console.log(err)
         res.status(500).json(err)
@@ -30,7 +30,7 @@ const userController = {
   },
   updateUser(req, res) {
     User.findOneAndUpdate( { _id: req.params.userId }, { $set: req.body } )
-      .then(data => res.json(data))
+      .then(data => res.json({ $new: data }))
       .catch((err) => {
         console.log(err)
         res.status(500).json(err)
@@ -38,7 +38,7 @@ const userController = {
   },
   deleteUser(req, res) {
     User.findOneAndDelete( { _id: req.params.userId } )
-      .then(data => res.json(data))
+      .then(res.json('Deleted User!'))
       .catch((err) => {
         console.log(err)
         res.status(500).json

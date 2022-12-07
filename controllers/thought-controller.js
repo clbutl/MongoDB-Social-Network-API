@@ -27,7 +27,7 @@ const thoughtController = {
   },
   updateThought(req, res) {
     Thought.findOneAndUpdate( { _id: req.params.userId }, { $set: req.body } )
-      .then(data => res.json(data))
+      .then(res.json('Updated Thought!'))
       .catch((err) => {
         console.log(err)
         res.status(500).json(err)
@@ -35,7 +35,7 @@ const thoughtController = {
   },
   deleteThought(req, res) {
     Thought.findOneAndDelete( { _id: req.params.userId } )
-      .then(data => res.json(data))
+      .then(res.json('Deleted Thought!'))
       .catch((err) => {
         console.log(err)
         res.status(500).json
